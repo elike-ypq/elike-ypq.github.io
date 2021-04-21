@@ -17,7 +17,7 @@
     <link rel="icon" href="/favicon.ico" >
     
     
-<link rel="stylesheet" href="/css/style.css?v=1619024723576.css">
+<link rel="stylesheet" href="/css/style.css?v=1619026444728.css">
 
     <!--[if lt IE 9]>
     
@@ -183,27 +183,58 @@
 </div>
 
 <!-- 文章评论 -->
+<head>
+  <!-- style sheet of Vssue -->
+  <link rel="stylesheet" href="https://unpkg.com/vssue/dist/vssue.min.css">
+</head>
 
-  
-<script src="/js/comment.js?v=1619024723557.js"></script>
+<body>
+  <div id="vssue"></div>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-  <-- 添加一个容器-->
-	<div id="gitalk-container"></div>
+  <!-- Introduce Vue first -->
+
+  <!-- vue runtime build (runtime only)  -->
+  <script src="https://unpkg.com/vue/dist/vue.runtime.min.js"></script>
+  <!-- OR: vue full build (runtime + compiler)  -->
+  <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+
+  <!-- Introduce Vssue after Vue -->
+
+  <!-- Vssue Github build -->
+  <script src="https://unpkg.com/vssue/dist/vssue.github.min.js"></script>
+  <!-- OR: Vssue Gitlab build -->
+  <script src="https://unpkg.com/vssue/dist/vssue.gitlab.min.js"></script>
+  <!-- OR: Vssue Bitbucket build -->
+  <script src="https://unpkg.com/vssue/dist/vssue.bitbucket.min.js"></script>
+  <!-- OR: Vssue Gitee build -->
+  <script src="https://unpkg.com/vssue/dist/vssue.gitee.min.js"></script>
+  <!-- OR: Vssue Gitea build -->
+  <script src="https://unpkg.com/vssue/dist/vssue.gitea.min.js"></script>
+
+  <!-- Use Vssue as a Vue component -->
+
+  <!-- use render function for vue runtime build -->
   <script>
-  var gitalk = new Gitalk({
-    owner: 'elike-ypq',
-    repo: 'blog_comments',
-    clientId: '4dda9a193798bdbace37',
-    clientSecret: 'f0d5a6507c636bb6899024637d16f4e8b9a2cb95',
-	admin: ['elike-ypq'],
-	id: location.pathname,
-	distractionFreeMode: false  // Facebook-like distraction free mode
-  });
-  gitalk.render('gitalk-container')
-  </script>
+    new Vue({
+      el: '#vssue',
 
+      render: h => h('Vssue', {
+        props: {
+          // here set the title of issue of current page
+          title: 'Vssue Dev',
+
+          // here set the options for your OAuth App
+          options: {
+            owner: 'elike',
+            repo: 'blog_comments',
+            clientId: '8ff480507548e17ad77f7318e6663d04cb64bc2b2bc1307c79f0f96d8ca07241',
+            clientSecret: '2db7ac171e4edc0daa7eaba990f4baa743a1fb3b1baaf95398dc5f044f40d4b3',
+          },
+        }
+      })
+    })
+  </script>
+</body>
 
 
             </div>
@@ -308,7 +339,7 @@
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="/js/main.js?v=1619024723577.js"></script>
+<script src="/js/main.js?v=1619026444730.js"></script>
 
 
 </body>
