@@ -17,7 +17,7 @@
     <link rel="icon" href="/favicon.ico" >
     
     
-<link rel="stylesheet" href="/css/style.css?v=1632309367447.css">
+<link rel="stylesheet" href="/css/style.css?v=1632309861338.css">
 
     <!--[if lt IE 9]>
     
@@ -243,107 +243,79 @@ mjx-container[display="true"] + br {
 <li>在使用的时候，由于整个内核只有一个时钟域，它能很方便地嵌入整个SOC，而且能在非常低的频率下工作。</li>
 </ul>
 <p>在整个内核结构中，单个picorv32.v实现了整个RISCV内核，我们可以在这个文件中方便配置内核，以满足自己的要求。</p>
-<ol>
-<li><p>EN_COUNTERS (default = 1)</p>
+<p>1 EN_COUNTERS (default = 1)</p>
 <p>使能RDCYCLE[H], RDTIME[H], 和RDINSTRET[H]指令</p>
-</li>
-<li><p>EN_COUNTERS64 (default = 1)</p>
+<p>2 EN_COUNTERS64 (default = 1)</p>
 <p>使能RDCYCLEH, RDTIMEH, RDINSTRETH指令。 如果EN_COUNTERS64=0, EN_COUNTERS=1, 系统仅支持RDCTCLE, RDTIME, RDINSTRET指令。</p>
-</li>
-<li><p>ENABLE_REGS_16_31 (default = 1)</p>
+<p>3 ENABLE_REGS_16_31 (default = 1)</p>
 <p>使能寄存器的高16位x16..x31，将其设置为0，可以实现RV32E ISA。然而，在RV32E ISA spec中，当处理器想要获取这些地址的信息时，会进入一个硬件的死循环，而在Picorv32中没有实现。</p>
-</li>
-<li><p>ENABLE_REGS_DUALPORT (default = 1)</p>
+<p>4 ENABLE_REGS_DUALPORT (default = 1)</p>
 <p>我们可以通过这个设置处理器从内存中取数据的端口数量，内存接口通常有单端和双端的区别。双端口的内存端口可以提高内存的访问速率，从而提高降低内存访问延迟。如果配置成双端口的接口，会增大芯片的面积。</p>
-</li>
-<li><p>LATCHED_MEM_RDATA (default = 0 )</p>
+<p>5 LATCHED_MEM_RDATA (default = 0 )</p>
 <p>LATCHED_MEM_RDATA = 1时，在经历过一次数据传输后，<code>mem_rdata</code> 寄存器中的数据将会保持下去。在默认配置中，Picorv32只期望在 <code>mem_valid &amp;&amp; mem_ready = 1</code>时<code>mem_rdata</code>有效，并且从内部锁定当前值。这个配置在<code>picorv32</code>核内有效，在<code>picorv32_axi</code> 和<code>picorv32_wb</code>核中会隐含置为0。</p>
-</li>
-<li><p>TWO_STAGE_SHIFT (default = 1 )</p>
+<p>6 TWO_STAGE_SHIFT (default = 1 )</p>
 <p>在默认情况下，移位操作被拆分成了两个步骤：首先是以4bit为一个单位进行移位，接着1bit一个单位进行移位。这样能提高移位速率，但同时增加了硬件开销。我们可以把它设置成零，从而进一步减小芯片的面积。</p>
-</li>
-<li><p>BARREL_SHIFTER (default =0 )</p>
+<p>7 BARREL_SHIFTER (default =0 )</p>
 <p>默认的的移位操作是是将移位分解为多个较小的移位来实现的（如TWO_STAGE_SHIFT中描述的）。当它设置为1时，移位操作可以一步到位。</p>
-</li>
-<li><p>TWO_CYCLE_COMPARE (default = 0)</p>
+<p>8 TWO_CYCLE_COMPARE (default = 0)</p>
 <p>通过在最长的数据传输路径中添加额外的边沿触发器，将其分为两个时钟周期实现数据传输，保证数据传输可靠性。</p>
 <p><em>Note: Enabling this parameter will be most effective when retiming (aka”register balancing”) is enabled in the synthesis flow.</em></p>
-</li>
-<li><p>TWO_CYCLE_ALU (default = 0)</p>
+<p>9 TWO_CYCLE_ALU (default = 0)</p>
 <p>在ALU的数据路径中插入边沿触发器， 改善所有指令使用ALU的时间开销。</p>
 <p><em>Note: Enabling this parameter will be most effective when retiming (aka “register balancing”) is enabled in the synthesis flow.</em></p>
-</li>
-<li><p>COMPRESSED_ISA (default =0 )</p>
+<p>10 COMPRESSED_ISA (default =0 )</p>
 <p>使能RISC-V 压缩指令集。（dhrystone测试的时候，需要将其配置为1）</p>
-</li>
-<li><p>CATCH_MISALIGN (default = 1)</p>
+<p>11 CATCH_MISALIGN (default = 1)</p>
 <p>将其设置为0可以禁用捕获非对齐内存读取电路。</p>
-</li>
-<li><p>CATCH_ILLINSN (default = 1)</p>
+<p>12 CATCH_ILLINSN (default = 1)</p>
 <p>设置为0禁用捕获非法指令的电路</p>
 <p>将其设置为0时，此核心仍然会进入 <code>EBREAK</code>指令的死循环中。当使能IRQs时，正常状态下CATCH_ILLINSN =1，<code>EBREAK</code>会触发 IRQ 1。而将其设置为0时，<code>EBREAK</code>将不会触发系统中断。</p>
-</li>
-<li><p>ENABLE_PCPI (default = 0)</p>
+<p>13 ENABLE_PCPI (default = 0)</p>
 <p>使能多核处理接口。</p>
-</li>
-<li><p>ENABLE_MUL (default = 0)</p>
+<p>14 ENABLE_MUL (default = 0)</p>
 <p>使能PCPI，并且实例化 <code>picorv32_pcpi_mul</code>核，实现<code>MUL[H[SU|U]]</code>指令。当ENABEL_PCPI=1时，外部的PCPI总线才会有效。</p>
-</li>
-<li><p>ENABLE_FAST_MUL (default =0 )</p>
+<p>15 ENABLE_FAST_MUL (default =0 )</p>
 <p>使能PCPI，并且实例化 <code>picorv32_pcpi_fast_mul</code>核，实现<code>MUL[H[SU|U]]</code>指令。当ENABEL_PCPI=1时，外部的PCPI总线才会有效。当ENABLE_MUL 和 ENABLE_FAST_MUL都设置为1时，ENABLE_MUL将会被忽略。</p>
-</li>
-<li><p>ENABLE_DIV (default = 0)</p>
+<p>16 ENABLE_DIV (default = 0)</p>
 <p>使能PCPI，并且实例化 <code>picorv32_pcpi_div核，实现</code>DIV[U]/REM[U]`指令。当ENABEL_PCPI=1时，外部的PCPI总线才会有效。</p>
-</li>
-<li><p>ENABLE_IRQ (default = 0)</p>
+<p>17 ENABLE_IRQ (default = 0)</p>
 <p>使能IRQs.</p>
-</li>
-<li><p>ENABLE_IRQ_QREGS (default = 1)</p>
+<p>18 ENABLE_IRQ_QREGS (default = 1)</p>
 <p>设置为0禁止对<code>getq</code>和<code>setq</code>指令的支持。根据RISC-V ABI，当没有<code>q</code>寄存器时，<code>irq</code>返回地址将会被存储在<code>x3(gp)</code>和<code>x4</code>的IRQ bitmask，全局指针和线程指针寄存器。由普通C语言生成的代码将不会与以上的寄存器发生交互。</p>
 <p>当ENABLE_IRQ = 0 时， q寄存器默认无效。</p>
-</li>
-<li><p>ENABLE_IRQ_TIMER (default = 1)</p>
+<p>19 ENABLE_IRQ_TIMER (default = 1)</p>
 <p>设置为0， 可以禁用<code>timer</code>指令。</p>
 <p>当ENABLE_IRQ = 0 时，timer寄存器默认无效。</p>
-</li>
-<li><p>ENABLE_TRACE (default = 0)</p>
+<p>20 ENABLE_TRACE (default = 0)</p>
 <p>使用<code>trace_valid</code>和<code>trace_data</code>输出端口生成执行跟踪。使用<code>make test_vcd</code>可以生成跟踪文件<code>*.trace</code>，再执行 <code>python3 showtrace.py testbench.trace firmware/firmware.elf</code> 进行解码。</p>
-</li>
-<li><p>REGS_INIT_ZERO (default = 0)</p>
+<p>21 REGS_INIT_ZERO (default = 0)</p>
 <p>设置为1可以初始化所以的寄存器为0 (使用 Verilog 的 <code>initial</code> 块)。</p>
-</li>
-<li><p>MASKED_IRQ (default = 32’h 0000_0000)<br>这个位掩码中的1位对应一个永久禁用的IRQ。</p>
-</li>
-<li><p>LATCHED_IRQ (default = 32’h ffff_ffff)</p>
+<p>22 MASKED_IRQ (default = 32’h 0000_0000)<br>这个位掩码中的1位对应一个永久禁用的IRQ。</p>
+<p>23 LATCHED_IRQ (default = 32’h ffff_ffff)</p>
 <p>位掩码中的一位对应一个IRQ 被锁定。 例如，当IRQ线只有一个周期是高电平时，中断将被标记为挂起，并一直挂起，直到中断处理程序被调用(又名“脉冲中断”或“边缘触发中断”)。</p>
 <p>设置位掩码其中一位为0， 可以对应设置中断线工作在电平敏感型中断模式。</p>
-</li>
-<li><p>PROGADDR_RESET (default = 32’h 0000_0000)</p>
+<p>24 PROGADDR_RESET (default = 32’h 0000_0000)</p>
 <p>程序的起始地址。</p>
-</li>
-<li><p>PROGADDR_IRQ (default = 32’h 0000_0010)</p>
+<p>25 PROGADDR_IRQ (default = 32’h 0000_0010)</p>
 <p>中断句柄的起始地址。</p>
-</li>
-<li><p>STACKADDR (default = 32’h ffff_ffff)</p>
+<p>26 STACKADDR (default = 32’h ffff_ffff)</p>
 <p>当这个参数有一个不同于0xffffffff的值时，那么寄存器<code>x2 </code>(堆栈指针)在重置时被初始化为这个值。(所有其他寄存器保持未初始化。)注意，RISC-V调用约定要求堆栈指针按16字节边界对齐(RV32I软浮点调用约定为4字节)。</p>
-</li>
-</ol>
 
     </div>
     <p class="eof">-- EOF --</p>
     <p class="post-meta">
         <span class="post-cat">分类：
-            <a class="cat-link" href="/categories/Circuit/">Circuit</a>
+            <a class="cat-link" href="/categories/RISC-V/">RISC-V</a>
         </span>
         <span class="post-tags">
             标签：
             
     
-        <a href="/tags/RISCV/" title="RISCV">RISCV</a> / 
-    
         <a href="/tags/Verilog/" title="Verilog">Verilog</a> / 
     
-        <a href="/tags/Digital-Circuit/" title="Digital Circuit">Digital Circuit</a>
+        <a href="/tags/Digital-Circuit/" title="Digital Circuit">Digital Circuit</a> / 
+    
+        <a href="/tags/RISC-V/" title="RISC-V">RISC-V</a>
     
 
         </span>
@@ -477,7 +449,7 @@ mjx-container[display="true"] + br {
     
     <li>
         <a href="/categories/Circuit/">Circuit</a>
-        <span class="badge">(6)</span>
+        <span class="badge">(5)</span>
     </li>
     
     <li>
@@ -487,6 +459,11 @@ mjx-container[display="true"] + br {
     
     <li>
         <a href="/categories/quantum-processor/">quantum processor</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="/categories/RISC-V/">RISC-V</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -507,8 +484,6 @@ mjx-container[display="true"] + br {
   
     <a class="tag-item" href="/tags/LFSR/" title="LFSR">LFSR (1)</a>
   
-    <a class="tag-item" href="/tags/RISCV/" title="RISCV">RISCV (1)</a>
-  
     <a class="tag-item" href="/tags/Verilog/" title="Verilog">Verilog (1)</a>
   
     <a class="tag-item" href="/tags/Digital-Circuit/" title="Digital Circuit">Digital Circuit (1)</a>
@@ -518,6 +493,8 @@ mjx-container[display="true"] + br {
     <a class="tag-item" href="/tags/quantum-processor/" title="quantum processor">quantum processor (1)</a>
   
     <a class="tag-item" href="/tags/Example/" title="Example">Example (1)</a>
+  
+    <a class="tag-item" href="/tags/RISC-V/" title="RISC-V">RISC-V (1)</a>
   
 </div>
     </section>
@@ -561,7 +538,7 @@ mjx-container[display="true"] + br {
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="/js/main.js?v=1632309367447.js"></script>
+<script src="/js/main.js?v=1632309861338.js"></script>
 
 
 </body>
