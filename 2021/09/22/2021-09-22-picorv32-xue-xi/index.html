@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Picorv32学习, elike-ypq">
-    <meta name="description" content="走一步，再走一步">
+    <meta name="keywords" content="Picorv32学习, Analog circtui design, Analog-to-digital converter, Low power">
+    <meta name="description" content="记录日常工作学习">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -257,7 +257,7 @@ mjx-container[display="true"] + br {
         <div class="logo-name">elike-ypq</div>
         <div class="logo-desc">
             
-            走一步，再走一步
+            记录日常工作学习
             
         </div>
     </div>
@@ -642,10 +642,10 @@ mjx-container[display="true"] + br {
 <p>默认的的移位操作是是将移位分解为多个较小的移位来实现的（如TWO_STAGE_SHIFT中描述的）。当它设置为1时，移位操作可以一步到位。</p>
 <p>8 TWO_CYCLE_COMPARE (default = 0)</p>
 <p>通过在最长的数据传输路径中添加额外的边沿触发器，将其分为两个时钟周期实现数据传输，保证数据传输可靠性。</p>
-<p><em>Note: Enabling this parameter will be most effective when retiming (aka”register balancing”) is enabled in the synthesis flow.</em></p>
+<p><em>Note: Enabling this parameter will be most effective when retiming (aka"register balancing") is enabled in the synthesis flow.</em></p>
 <p>9 TWO_CYCLE_ALU (default = 0)</p>
 <p>在ALU的数据路径中插入边沿触发器， 改善所有指令使用ALU的时间开销。</p>
-<p><em>Note: Enabling this parameter will be most effective when retiming (aka “register balancing”) is enabled in the synthesis flow.</em></p>
+<p><em>Note: Enabling this parameter will be most effective when retiming (aka "register balancing") is enabled in the synthesis flow.</em></p>
 <p>10 COMPRESSED_ISA (default =0 )</p>
 <p>使能RISC-V 压缩指令集。（dhrystone测试的时候，需要将其配置为1）</p>
 <p>11 CATCH_MISALIGN (default = 1)</p>
@@ -673,16 +673,16 @@ mjx-container[display="true"] + br {
 <p>使用<code>trace_valid</code>和<code>trace_data</code>输出端口生成执行跟踪。使用<code>make test_vcd</code>可以生成跟踪文件<code>*.trace</code>，再执行 <code>python3 showtrace.py testbench.trace firmware/firmware.elf</code> 进行解码。</p>
 <p>21 REGS_INIT_ZERO (default = 0)</p>
 <p>设置为1可以初始化所以的寄存器为0 (使用 Verilog 的 <code>initial</code> 块)。</p>
-<p>22 MASKED_IRQ (default = 32’h 0000_0000)<br>这个位掩码中的1位对应一个永久禁用的IRQ。</p>
-<p>23 LATCHED_IRQ (default = 32’h ffff_ffff)</p>
+<p>22 MASKED_IRQ (default = 32'h 0000_0000) 这个位掩码中的1位对应一个永久禁用的IRQ。</p>
+<p>23 LATCHED_IRQ (default = 32'h ffff_ffff)</p>
 <p>位掩码中的一位对应一个IRQ 被锁定。 例如，当IRQ线只有一个周期是高电平时，中断将被标记为挂起，并一直挂起，直到中断处理程序被调用(又名“脉冲中断”或“边缘触发中断”)。</p>
 <p>设置位掩码其中一位为0， 可以对应设置中断线工作在电平敏感型中断模式。</p>
-<p>24 PROGADDR_RESET (default = 32’h 0000_0000)</p>
+<p>24 PROGADDR_RESET (default = 32'h 0000_0000)</p>
 <p>程序的起始地址。</p>
-<p>25 PROGADDR_IRQ (default = 32’h 0000_0010)</p>
+<p>25 PROGADDR_IRQ (default = 32'h 0000_0010)</p>
 <p>中断句柄的起始地址。</p>
-<p>26 STACKADDR (default = 32’h ffff_ffff)</p>
-<p>当这个参数有一个不同于0xffffffff的值时，那么寄存器<code>x2 </code>(堆栈指针)在重置时被初始化为这个值。(所有其他寄存器保持未初始化。)注意，RISC-V调用约定要求堆栈指针按16字节边界对齐(RV32I软浮点调用约定为4字节)。</p>
+<p>26 STACKADDR (default = 32'h ffff_ffff)</p>
+<p>当这个参数有一个不同于0xffffffff的值时，那么寄存器<code>x2</code>(堆栈指针)在重置时被初始化为这个值。(所有其他寄存器保持未初始化。)注意，RISC-V调用约定要求堆栈指针按16字节边界对齐(RV32I软浮点调用约定为4字节)。</p>
 
                 
             </div>
@@ -788,6 +788,269 @@ mjx-container[display="true"] + br {
     
 
     
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'bKcodOuKORotzxbocJv2dX2a-gzGzoHsz',
+        appKey: 'YcokW7FUPrWcbl6028XT22S4',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
 
     
 
@@ -1053,7 +1316,7 @@ mjx-container[display="true"] + br {
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">6k</span>&nbsp;字
+                class="white-color">5.9k</span>&nbsp;字
             
             
             
@@ -1263,6 +1526,10 @@ $(function () {
 	
     
 
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
     
 
     
