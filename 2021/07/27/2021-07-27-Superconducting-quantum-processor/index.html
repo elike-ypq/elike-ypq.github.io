@@ -583,7 +583,7 @@ mjx-container[display="true"] + br {
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-04-02
+                    2022-04-03
                 </div>
                 
 
@@ -729,6 +729,33 @@ mjx-container[display="true"] + br {
             
         </div>
     </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '19371a3e7ecbdb711019',
+        clientSecret: '8aa96eef203ae74a275a12858182f31c068b3fe6',
+        repo: 'elike-ypq.github.io',
+        owner: 'elike-ypq',
+        admin: "elike-ypq",
+        id: '2021-07-27T00-00-00',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 
@@ -991,13 +1018,13 @@ mjx-container[display="true"] + br {
         el: '#vcomments',
         appId: 'bKcodOuKORotzxbocJv2dX2a-gzGzoHsz',
         appKey: 'YcokW7FUPrWcbl6028XT22S4',
-        notify: 'false' === 'true',
+        notify: 'true' === 'true',
         verify: 'false' === 'true',
         visitor: 'true' === 'true',
         avatar: 'mm',
         pageSize: '10',
         lang: 'zh-cn',
-        placeholder: 'just go go'
+        placeholder: '没有Github账号的在这里留言评论～'
     });
 </script>
 
@@ -1028,7 +1055,7 @@ mjx-container[display="true"] + br {
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            简要学习Picorv32基本配置
                         
                     </div>
                     <div class="publish-info">
@@ -1085,7 +1112,7 @@ mjx-container[display="true"] + br {
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            A linear feedback shift register is a combination of series of flip flop and XOR or XNOR logic gates. It is an important component in communication system where, it paly important role in various application such as cryptography application, CRC generator and checker circuit, gold code generator, for generation of pseudorandom sequence, for designing encoder and decoder in different communication channels to ensure network security. [1]
                         
                     </div>
                     <div class="publish-info">
@@ -1107,16 +1134,16 @@ mjx-container[display="true"] + br {
                 
                 <div class="card-action article-tags">
                     
+                    <a href="/tags/LFSR/">
+                        <span class="chip bg-color">LFSR</span>
+                    </a>
+                    
                     <a href="/tags/Analysis/">
                         <span class="chip bg-color">Analysis</span>
                     </a>
                     
                     <a href="/tags/Circuit-Design/">
                         <span class="chip bg-color">Circuit Design</span>
-                    </a>
-                    
-                    <a href="/tags/LFSR/">
-                        <span class="chip bg-color">LFSR</span>
                     </a>
                     
                 </div>
